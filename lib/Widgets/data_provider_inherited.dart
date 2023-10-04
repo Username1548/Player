@@ -62,9 +62,15 @@ class DataProviderInheritedModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void tapOnNext(){
-    if (current == null){
-      
+  void tapOnNext() {
+    if (current == null) {
+      current = songs.nodeAt(0);
+      currentIndex = 0;
+      tapOnList(currentIndex!, current!.data.songFile!);
+    } else {
+      current = current!.nextNode;
+      currentIndex = currentIndex! + 1;
+      tapOnList(currentIndex!, current!.data.songFile!);
     }
   }
 }

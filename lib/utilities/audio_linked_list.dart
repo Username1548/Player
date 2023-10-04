@@ -244,7 +244,6 @@ class _MyIterator<T> implements Iterator<T> {
       _current = _start;
     }
   }
-
   @override
   T get current {
     if (_current == null) {

@@ -62,7 +62,7 @@ class _MyScaffoldState extends State<MyScaffold> {
                   ],
                 ),
               ),
-              ShowSongs(songs.iterator, songs.length),
+              ShowSongs(songs.toList(), songs.length),
             ],
           ),
         ),

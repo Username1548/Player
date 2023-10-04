@@ -14,6 +14,12 @@ class SongElement extends StatefulWidget {
 class _SongElementState extends State<SongElement> {
   late final DataProviderInheritedModel? model;
   @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     model = DataProviderInherited.of(context)?.model;
