@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     if (Platform.isAndroid) {
       Permission.storage.request();
     } else {
-      throw 'Уйди отсюда со своим айфоном';
+      throw 'Not supported platform';
     }
     return const MaterialApp(
       debugShowCheckedModeBanner: false,

@@ -23,6 +23,7 @@ class MyLinkedList<T> extends Iterable<T> {
   @override
   bool get isEmpty => _head == null;
 
+  ///Adds [data] at start of the LinkedList
   void addFirs(T data) {
     Node<T> current = Node(data);
     length += 1;
@@ -37,6 +38,7 @@ class MyLinkedList<T> extends Iterable<T> {
     }
   }
 
+  ///Adds the [data] at end of the LinkedList
   void addLast(T data) {
     Node<T> current = Node(data);
     length += 1;
@@ -52,6 +54,9 @@ class MyLinkedList<T> extends Iterable<T> {
     _head!.previousNode = _tail;
   }
 
+  /// Adds the [data] at [index]
+  ///
+  /// The [index] must be [length] * -1 <= [index] < [length].
   void addAt(int index, T data) {
     Node<T>? current = Node(data);
     if (index == 0) {
@@ -124,7 +129,7 @@ class MyLinkedList<T> extends Iterable<T> {
   /// Removes the element at [index]
   /// Returns the data of element.
   ///
-  /// The [index] must be -[length] <= [index] < [length].
+  /// The [index] must be [length] * -1 <= [index] < [length].
   T removeAt(int index) {
     if (!isEmpty) {
       Node<T>? current = _head;
@@ -177,7 +182,7 @@ class MyLinkedList<T> extends Iterable<T> {
 
   /// Returns the element at [index].
   ///
-  /// The [index] must be -[length] <= [index] < [length].
+  /// The [index] must be [length] * -1 <= [index] < [length].
   @override
   T elementAt(int index) {
     if (!isEmpty) {
@@ -196,6 +201,9 @@ class MyLinkedList<T> extends Iterable<T> {
     throw 'Index out of range';
   }
 
+  /// Returns the Node<T> at [index].
+  ///
+  /// The [index] must be [length] * -1 <= [index] < [length].
   Node<T>? nodeAt(index) {
     Node<T>? current = _head;
     int i = 0;
@@ -211,6 +219,7 @@ class MyLinkedList<T> extends Iterable<T> {
     return null;
   }
 
+  ///Turns the LinkedList into String
   @override
   String toString() {
     var result = StringBuffer();

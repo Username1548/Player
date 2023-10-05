@@ -62,7 +62,9 @@ class _MyScaffoldState extends State<MyScaffold> {
                   ],
                 ),
               ),
-              ShowSongs(songs.toList(), songs.length),
+              (songs.isEmpty)
+                  ? const Text('Please download any audio on your phone')
+                  : ShowSongs(songs.toList(), songs.length),
             ],
           ),
         ),
