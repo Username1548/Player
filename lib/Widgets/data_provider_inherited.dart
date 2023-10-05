@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ class DataProviderInheritedModel extends ChangeNotifier {
   final player = AudioPlayer();
   final List<bool> listOfPlaying;
   final MyLinkedList<Song> songs;
+  StreamSubscription subscription = const Stream.empty().listen((event) {});
   DataProviderInheritedModel(this.listOfPlaying, this.songs);
 
   void tapOnList(int index, File file) {
@@ -35,6 +37,7 @@ class DataProviderInheritedModel extends ChangeNotifier {
         current = songs.nodeAt(index);
         currentIndex = index;
         listOfPlaying[index] = true;
+        _createSongSteam();
       } else {
         if (listOfPlaying[currentIndex!]) {
           player.play(DeviceFileSource(file.path));
@@ -42,9 +45,11 @@ class DataProviderInheritedModel extends ChangeNotifier {
           listOfPlaying[currentIndex!] = false;
           currentIndex = index;
           listOfPlaying[index] = true;
+          _createSongSteam();
         } else {
           if (currentIndex == index) {
             player.resume();
+            subscription.resume();
             listOfPlaying[index] = true;
           } else {
             player.play(DeviceFileSource(file.path));
@@ -52,25 +57,71 @@ class DataProviderInheritedModel extends ChangeNotifier {
             listOfPlaying[currentIndex!] = false;
             currentIndex = index;
             listOfPlaying[index] = true;
+            _createSongSteam();
           }
         }
       }
     } else {
       player.pause();
+      subscription.pause();
       listOfPlaying[index] = false;
     }
     notifyListeners();
   }
 
-  void tapOnNext() {
+  void tapOnNext({int? userIndex}) {
     if (current == null) {
-      current = songs.nodeAt(0);
-      currentIndex = 0;
-      tapOnList(currentIndex!, current!.data.songFile!);
+      currentIndex = 1;
+      current = songs.nodeAt(currentIndex);
+      listOfPlaying[currentIndex!] = true;
+      player.play(DeviceFileSource(current!.data.songFile!.path));
     } else {
-      current = current!.nextNode;
-      currentIndex = currentIndex! + 1;
-      tapOnList(currentIndex!, current!.data.songFile!);
+      if (userIndex == null) {
+        current = current!.nextNode;
+        listOfPlaying[currentIndex!] = false;
+        currentIndex =
+            (currentIndex! == songs.length - 1) ? 0 : currentIndex! + 1;
+        listOfPlaying[currentIndex!] = true;
+        player.play(DeviceFileSource(current!.data.songFile!.path));
+      } else {
+        listOfPlaying[currentIndex!] = false;
+        currentIndex = (userIndex == songs.length - 1) ? 0 : userIndex + 1;
+        listOfPlaying[currentIndex!] = true;
+        current = songs.nodeAt(currentIndex);
+        player.play(DeviceFileSource(current!.data.songFile!.path));
+      }
+    }
+    _createSongSteam();
+    notifyListeners();
+  }
+
+  void tapOnPrevious() {
+    if (current == null) {
+      currentIndex = songs.length - 1;
+      current = songs.nodeAt(currentIndex);
+      listOfPlaying[currentIndex!] = true;
+      player.play(DeviceFileSource(current!.data.songFile!.path));
+    } else {
+      current = current!.previousNode;
+      listOfPlaying[currentIndex!] = false;
+      currentIndex =
+          (currentIndex! == 0) ? songs.length - 1 : currentIndex! - 1;
+      listOfPlaying[currentIndex!] = true;
+      player.play(DeviceFileSource(current!.data.songFile!.path));
+    }
+    _createSongSteam();
+    notifyListeners();
+  }
+
+  void _createSongSteam() {
+    if (current != null) {
+      subscription.cancel();
+      Stream stream = Stream.periodic(
+          Duration(seconds: current!.data.trackDuration! ~/ 1000 + 2),
+          (next) => next);
+      subscription = stream.listen((event) {
+        tapOnNext();
+      });
     }
   }
 }

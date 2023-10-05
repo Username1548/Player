@@ -8,7 +8,6 @@ class MyLinkedList<T> extends Iterable<T> {
 
   @override
   int length = 0;
-  
 
   Node<T>? _head;
   Node<T>? _tail;
@@ -23,7 +22,6 @@ class MyLinkedList<T> extends Iterable<T> {
 
   @override
   bool get isEmpty => _head == null;
-
 
   void addFirs(T data) {
     Node<T> current = Node(data);
@@ -45,13 +43,13 @@ class MyLinkedList<T> extends Iterable<T> {
 
     if (isEmpty) {
       _head = current;
-      _head!.previousNode = _tail;
     } else {
       _tail!.nextNode = current;
     }
     current.previousNode = _tail;
     current.nextNode = _head;
     _tail = current;
+    _head!.previousNode = _tail;
   }
 
   void addAt(int index, T data) {
@@ -200,17 +198,17 @@ class MyLinkedList<T> extends Iterable<T> {
 
   Node<T>? nodeAt(index) {
     Node<T>? current = _head;
-      int i = 0;
-      while (i < length) {
-        if (i == index) {
-          return current;
-        } else if (i == length + index) {
-          return current;
-        }
-        current = current!.nextNode;
-        i += 1;
+    int i = 0;
+    while (i < length) {
+      if (i == index) {
+        return current;
+      } else if (i == length + index) {
+        return current;
       }
-      return null;
+      current = current!.nextNode;
+      i += 1;
+    }
+    return null;
   }
 
   @override
@@ -264,8 +262,6 @@ class _MyIterator<T> implements Iterator<T> {
     _currentIndex++;
     return true;
   }
-
-  
 }
 
 class Node<T> {

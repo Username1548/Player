@@ -66,7 +66,7 @@ class _MyScaffoldState extends State<MyScaffold> {
             ],
           ),
         ),
-        bottomSheet: CurrentSong(),
+        bottomSheet: const CurrentSong(),
       ),
     );
   }

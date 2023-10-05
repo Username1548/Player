@@ -19,6 +19,7 @@ class _SongElementState extends State<SongElement> {
       super.setState(fn);
     }
   }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();

@@ -15,11 +15,8 @@ class CurrentSong extends StatelessWidget {
   }
 }
 
-
-
 class SongElement extends StatefulWidget {
   const SongElement({super.key});
-
 
   @override
   State<SongElement> createState() => _SongElementState();
@@ -38,6 +35,116 @@ class _SongElementState extends State<SongElement> {
 
   @override
   Widget build(BuildContext context) {
-    return Text('Text');
-  }      
+    if (model!.current == null) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+              width: 30,
+              height: 30,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: const Color.fromARGB(145, 0, 0, 0),
+              ),
+              child: const Icon(
+                Icons.music_note_rounded,
+                color: Color.fromARGB(255, 224, 217, 195),
+                size: 10,
+              )),
+          const Text('Player'),
+          // ignore: avoid_unnecessary_containers
+          Container(
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    model!.tapOnPrevious();
+                  },
+                  icon: const Icon(Icons.skip_previous_rounded),
+                ),
+                ((model!.currentIndex == null)
+                        ? false
+                        : model!.listOfPlaying[model!.currentIndex!])
+                    ? IconButton(
+                        onPressed: () {
+                          model!.tapOnList(model!.currentIndex!,
+                              model!.current!.data.songFile!);
+                        },
+                        icon: const Icon(Icons.pause_outlined))
+                    : IconButton(
+                        onPressed: () {
+                          if (model!.current == null) {
+                            model!.tapOnList(0, model!.songs.first.songFile!);
+                          } else {
+                            model!.tapOnList(model!.currentIndex!,
+                                model!.current!.data.songFile!);
+                          }
+                        },
+                        icon: const Icon(Icons.play_arrow_rounded),
+                      ),
+                IconButton(
+                  onPressed: () {
+                    model!.tapOnNext();
+                  },
+                  icon: const Icon(Icons.skip_next_rounded),
+                )
+              ],
+            ),
+          )
+        ],
+      );
+    } else {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+              width: 30,
+              height: 30,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: const Color.fromARGB(145, 0, 0, 0),
+              ),
+              child: const Icon(
+                Icons.music_note_rounded,
+                color: Color.fromARGB(255, 224, 217, 195),
+                size: 10,
+              )),
+          Text(model!.current!.data.trackName!.substring(0, 8)),
+          // ignore: avoid_unnecessary_containers
+          Container(
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    model!.tapOnPrevious();
+                  },
+                  icon: const Icon(Icons.skip_previous_rounded),
+                ),
+                (model!.listOfPlaying[model!.currentIndex!])
+                    ? IconButton(
+                        onPressed: () {
+                          model!.tapOnList(model!.currentIndex!,
+                              model!.current!.data.songFile!);
+                        },
+                        icon: const Icon(Icons.pause_outlined))
+                    : IconButton(
+                        onPressed: () {
+                          model!.tapOnList(model!.currentIndex!,
+                              model!.current!.data.songFile!);
+                        },
+                        icon: const Icon(Icons.play_arrow_rounded),
+                      ),
+                IconButton(
+                  onPressed: () {
+                    model!.tapOnNext();
+                  },
+                  icon: const Icon(Icons.skip_next_rounded),
+                )
+              ],
+            ),
+          )
+        ],
+      );
+    }
+  }
 }

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class ShowPlayLists extends StatelessWidget {
   ShowPlayLists({super.key});
   final List<String> entries = <String>['A', 'B', 'C', 'c', 'asd', 'a'];
+  @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 150,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
