@@ -17,6 +17,8 @@ You can download the application from the Yandex disk link below.
 
 
 # Special for Vladimir Sergeevich
+linkedList is located in lib/utilities/audio_linked_list.dar
+
 to run tests and to use the linter you have to:
 - clone the application
 - download [dart sdk](https://dart.dev/get-dart)
