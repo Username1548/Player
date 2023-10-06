@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:marquee/marquee.dart';
 import 'package:music_app/Widgets/data_provider_inherited.dart';
 
 class CurrentSong extends StatelessWidget {
