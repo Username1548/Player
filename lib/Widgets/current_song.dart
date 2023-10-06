@@ -112,13 +112,7 @@ class _SongElementState extends State<SongElement> {
               )),
           SizedBox(
             width: 100,
-            child: Marquee(
-              text: '${model!.current!.data.trackName!} ',
-              startAfter: const Duration(seconds: 5),
-              pauseAfterRound: const Duration(seconds: 5),
-              blankSpace: 40,
-              velocity: 20,
-            ),
+            child: Text(model!.current!.data.trackName!),
           ),
           // ignore: avoid_unnecessary_containers
           Container(
