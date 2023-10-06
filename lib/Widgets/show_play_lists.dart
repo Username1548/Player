@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ShowPlayLists extends StatelessWidget {
   ShowPlayLists({super.key});
-  final List<String> entries = <String>['A', 'B', 'C', 'c', 'asd', 'a'];
+  final List<String> entries = <String>['Главный'];
   @override
   Widget build(BuildContext context) {
     return SizedBox(

@@ -4,7 +4,7 @@ class MyLinkedList<T> extends Iterable<T> {
   /// [length] - Длинна связного списка
   /// [_head] - первый эллемент связного списка
   /// [_tail] - последний эллемент связного списка
-  /// [list] - список данных, которые можно создать при инициализации списка
+  /// [list] - список данных, которые можно задать при инициализации списка
 
   @override
   int length = 0;
@@ -97,7 +97,7 @@ class MyLinkedList<T> extends Iterable<T> {
       length += 1;
       return;
     }
-    throw 'Index out of range';
+    throw Exception('Index out of range');
   }
 
   /// Removes the first occurrence of [data] from this list.
@@ -160,7 +160,7 @@ class MyLinkedList<T> extends Iterable<T> {
         i += 1;
       }
     }
-    throw 'Index out of range';
+    throw Exception('Index out of range');
   }
 
   /// Returns the first index of [data] if [data] was in the list,
@@ -198,7 +198,7 @@ class MyLinkedList<T> extends Iterable<T> {
         i += 1;
       }
     }
-    throw 'Index out of range';
+    throw Exception('Index out of range');
   }
 
   /// Returns the Node<T> at [index].
@@ -231,9 +231,9 @@ class MyLinkedList<T> extends Iterable<T> {
         currentNode = currentNode.nextNode;
         i += 1;
       }
-      return result.toString();
+      return result.toString().trimRight();
     }
-    return 'null';
+    return 'empty';
   }
 
   @override
@@ -274,10 +274,11 @@ class _MyIterator<T> implements Iterator<T> {
 }
 
 class Node<T> {
+  /// Node<T> - узел связного списка
   ///
-  ///
-  ///
-  ///
+  /// [nextNode] - ссылка на следующий узел списка
+  /// [previousNode] - ссылка на предыдущий узел списка
+  /// [data] - данные, которые хранит узел
   Node<T>? nextNode;
   Node<T>? previousNode;
   T data;

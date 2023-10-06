@@ -12,12 +12,15 @@ class MyHomePage extends StatelessWidget {
       future: SongManager().songsList,
       builder: (context, snapshot) {
         MyLinkedList<Song>? songs = snapshot.data;
-        if (snapshot.hasData) {
-          return SafeArea(top: false, child: MyScaffold(songs!));
-        } else if (snapshot.hasError) {
-          return const Text('Some error occured!');
-        } else {
-          return const Center(child: CircularProgressIndicator());
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+            return const Center(child: CircularProgressIndicator());
+          default:
+            if (snapshot.hasError) {
+              return const Text('Some error occured!');
+            } else {
+              return SafeArea(top: false, child: MyScaffold(songs!));
+            }
         }
       },
     );

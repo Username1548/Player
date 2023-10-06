@@ -1,30 +1,41 @@
 import 'package:flutter_media_metadata/flutter_media_metadata.dart';
 import 'dart:io';
 import 'package:music_app/utilities/audio_linked_list.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class SongManager {
   static const String _directoryPath = '/storage/emulated/0/Download/';
-  final Directory _downloadDirectory = Directory(_directoryPath);
 
   Future<MyLinkedList<Song>> get songsList async {
-    var fileList = _downloadDirectory.listSync();
-    if (fileList.isNotEmpty) {
-      MyLinkedList<Song> result = MyLinkedList();
-      for (var file in fileList) {
-        if (file is File && file.path.endsWith('.mp3')) {
-          final metadata = await MetadataRetriever.fromFile(file);
-          result.addLast(Song(
-            songFile: file,
-            trackName: metadata.trackName,
-            trackArtistNames: metadata.trackArtistNames,
-            authorName: metadata.authorName,
-            trackDuration: metadata.trackDuration,
-          ));
+    if (Platform.isAndroid) {
+      var permission = Permission.storage.request();
+      if (await permission.isGranted) {
+        final Directory downloadDirectory = Directory(_directoryPath);
+        var fileList = downloadDirectory.listSync();
+        if (fileList.isNotEmpty) {
+          MyLinkedList<Song> result = MyLinkedList();
+          for (var file in fileList) {
+            if (file is File && file.path.endsWith('.mp3')) {
+              final metadata = await MetadataRetriever.fromFile(file);
+              result.addLast(Song(
+                songFile: file,
+                trackName: metadata.trackName,
+                trackArtistNames: metadata.trackArtistNames,
+                authorName: metadata.authorName,
+                trackDuration: metadata.trackDuration,
+              ));
+            }
+          }
+          return result;
+        } else {
+          return MyLinkedList();
         }
+      } else {
+        throw 'Permission is denied';
       }
-      return result;
+    } else {
+      throw 'Unsupported Platform';
     }
-    return MyLinkedList();
   }
 }
 
