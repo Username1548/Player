@@ -1,16 +1,27 @@
 # music_app
 
-A new Flutter project.
+This is awesome project to listen to music on your phone.
 
-## Getting Started
+Supported platform:
+- Android
 
-This project is a starting point for a Flutter application.
+To listen to music you have to download some on your phone, so that the aplication can see the music files
+they have to be located in the Download folder on your phone,
 
-A few resources to get you started if this is your first Flutter project:
+Any files that were downladed from the internet are located in the Downlad folder usually.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+You can download the application from the Yandex disk link below.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[gogogo](https://disk.yandex.ru/d/O9tC6GEbfikpeg)
+
+
+
+# Special for Vladimir Sergeevich
+to run tests and to use the linter you have to:
+- clone the application
+- download [dart sdk](https://dart.dev/get-dart)
+- download [flutter sdk](https://docs.flutter.dev/get-started/install)
+- enter the comands into the terminal
+
+      dart analyze
+      flutter test
