@@ -38,6 +38,7 @@ dependencies:
   flutter_media_metadata: ^1.0.0
   permission_handler: ^8.0.0
   audioplayers: ^5.1.0
+  marquee: ^2.2.3
 
 dev_dependencies:
   flutter_test:

@@ -32,7 +32,7 @@ class ShowPlayLists extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 6),
                   child: Text(
-                    'Playlist ${entries[index]}',
+                    entries[index],
                     style: const TextStyle(
                         color: Color.fromARGB(201, 22, 143, 255)),
                   ),

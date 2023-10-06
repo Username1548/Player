@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marquee/marquee.dart';
 import 'package:music_app/Widgets/data_provider_inherited.dart';
 
 class CurrentSong extends StatelessWidget {
@@ -109,7 +110,16 @@ class _SongElementState extends State<SongElement> {
                 color: Color.fromARGB(255, 224, 217, 195),
                 size: 10,
               )),
-          Text(model!.current!.data.trackName!.substring(0, 8)),
+          SizedBox(
+            width: 100,
+            child: Marquee(
+              text: '${model!.current!.data.trackName!} ',
+              startAfter: const Duration(seconds: 5),
+              pauseAfterRound: const Duration(seconds: 5),
+              blankSpace: 40,
+              velocity: 20,
+            ),
+          ),
           // ignore: avoid_unnecessary_containers
           Container(
             child: Row(
