@@ -13,17 +13,3 @@ Any files that were downladed from the internet are located in the Downlad folde
 You can download the application from the Yandex disk link below.
 
 [gogogo](https://disk.yandex.ru/d/O9tC6GEbfikpeg)
-
-
-
-# Special for Vladimir Sergeevich
-linkedList is located in lib/utilities/audio_linked_list.dar
-
-to run tests and to use the linter you have to:
-- clone the application
-- download [dart sdk](https://dart.dev/get-dart)
-- download [flutter sdk](https://docs.flutter.dev/get-started/install)
-- enter the comands into the terminal
-
-      dart analyze
-      flutter test
